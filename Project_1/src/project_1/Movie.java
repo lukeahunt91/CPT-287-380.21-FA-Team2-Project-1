@@ -27,6 +27,21 @@ public class Movie {
 	}
 	
 	//Methods
+	public void setRelDate(Date newDate) {
+		releaseDate = newDate;
+		// TODO: FINISH METHOD
+	}
+	
+	public void setDesc (String newDesc) {
+		description = newDesc;
+		// TODO: FINISH METHOD
+	}
+	
+	public String getName () {
+		return name;
+		// TODO: FINISH METHOD
+	}
+	
 	@Override public String toString(){
 		//TODO: FINISH METHOD
 	}

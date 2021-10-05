@@ -16,18 +16,20 @@ public class Movie {
 	private enum status { RELEASED, RECEIVED } 
 	private status movieStatus;
 	
+
 	//Make Movie class a node? - LAH 10/04/21
 	Movie next, prev;
 	
 	public Movie() {} //Default
 	
 	public Movie(String title, Date releaseDate, String description, Date receiveDate, String releaseStatus) {
+
 		this.setTitle(title);
 		this.setReleaseDate(releaseDate);
 		this.setDescription(description);
 		this.setRecieveDate(receiveDate);
-		if(releaseStatus.equals("released")) { this.movieStatus = status.RELEASED;}
-		else { this.movieStatus = status.RECEIVED;}
+		this.movieStatus = releaseStatus;
+
 	}
 	
 	//Getters
@@ -67,10 +69,10 @@ public class Movie {
 	public void setRecieveDate(Date recieveDate) {
 		this.recieveDate = recieveDate;
 	}
-	
-	public void setStatus(String releaseStatus) {
-		if(releaseStatus.equals("released")) { this.movieStatus = status.RELEASED;}
-		else { this.movieStatus = status.RECEIVED;}
+
+	public void setStatus(status movieStatus) {
+		this.movieStatus = movieStatus;
+
 	}
 
 
@@ -79,5 +81,7 @@ public class Movie {
 	 * @Override public String toString(){
 		//TODO: FINISH METHOD
 	}
+
 	*/
+
 }

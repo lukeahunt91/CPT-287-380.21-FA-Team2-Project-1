@@ -10,22 +10,65 @@ import java.sql.Date;
 /** A doubly-linked-list movie object (modified node)*/
 public class Movie {
 	//Data fields
-	String name; // Title of movie
-	Date releaseDate;
-	String description;
-	Date receiveDate;
-	Movie next, prev;
-	enum status {RELEASED, RECEIVED}; //TODO: FIXME!!! Is this correct syntax?
+	private String title;
+	private Date releaseDate;
+	private String description;
+	private Date recieveDate;
+	private enum status { RELEASED, RECEIVED } 
+	private status movieStatus;
 	
-	//Constructor
-	Movie(String newName, Date newRelDate, String newDesc, Date newRecDate/**TODO FIXME:, status NewStatus*/){
-		name = newName;
-		this.releaseDate = newRelDate;
-		this.description = newDesc;
-		this.receiveDate = newRecDate;
-		// TODO: FIXME!!! How to set status enum value for Movie?
+	public Movie() {} //Default
+	
+	public Movie(String title, Date releaseDate, String description, Date receiveDate, status releaseStatus) {
+		this.setTitle(title);
+		this.setReleaseDate(releaseDate);
+		this.setDescription(description);
+		this.setRecieveDate(receiveDate);
+		this.movieStatus = releaseStatus;
 	}
 	
+	//Getters
+	public String getTitle() {
+		return title;
+	}
+	
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public Date getRecieveDate() {
+		return recieveDate;
+	}
+	
+	public String getStatus() {
+		return movieStatus.toString();
+	}
+	
+	//Setters
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setRecieveDate(Date recieveDate) {
+		this.recieveDate = recieveDate;
+	}
+	public void setStatus(status movieStatus) {
+		this.movieStatus = movieStatus;
+	}
+
+
 	//Methods
 	@Override public String toString(){
 		//TODO: FINISH METHOD

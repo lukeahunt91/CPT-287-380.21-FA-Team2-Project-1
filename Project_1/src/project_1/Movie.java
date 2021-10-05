@@ -3,8 +3,7 @@ package project_1;
 import java.sql.Date;
 
 /**
- * @Steven Shackleford: Determine syntax for ENUM values & complete toString() override
- * TODO: Create getters/setters to be in this class or Movie_DList class
+ * TODO: Complete toSTring() override
  */
 
 /** A doubly-linked-list movie object (modified node)*/

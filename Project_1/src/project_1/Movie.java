@@ -1,6 +1,6 @@
 package project_1;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * TODO: Complete toSTring() override
@@ -28,7 +28,7 @@ public class Movie {
 		this.setReleaseDate(releaseDate);
 		this.setDescription(description);
 		this.setRecieveDate(receiveDate);
-		this.movieStatus = releaseStatus;
+		this.movieStatus = status.valueOf(releaseStatus);
 
 	}
 	
@@ -49,8 +49,8 @@ public class Movie {
 		return recieveDate;
 	}
 	
-	public String getStatus() {
-		return movieStatus.toString();
+	public status getMovieStatus() {
+		return movieStatus;
 	}
 	
 	//Setters
@@ -70,9 +70,8 @@ public class Movie {
 		this.recieveDate = recieveDate;
 	}
 
-	public void setStatus(status movieStatus) {
-		this.movieStatus = movieStatus;
-
+	public void setMovieStatus(String newStatus) {
+		this.movieStatus = status.valueOf(newStatus);
 	}
 
 

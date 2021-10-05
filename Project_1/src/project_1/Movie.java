@@ -3,8 +3,7 @@ package project_1;
 import java.sql.Date;
 
 /**
- * @Steven Shackleford: Determine syntax for ENUM values & complete toString() override
- * TODO: Create getters/setters to be in this class or Movie_DList class
+ * TODO: Complete toSTring() override
  */
 
 /** A doubly-linked-list movie object (modified node)*/
@@ -17,14 +16,20 @@ public class Movie {
 	private enum status { RELEASED, RECEIVED } 
 	private status movieStatus;
 	
+
+	//Make Movie class a node? - LAH 10/04/21
+	Movie next, prev;
+	
 	public Movie() {} //Default
 	
-	public Movie(String title, Date releaseDate, String description, Date receiveDate, status releaseStatus) {
+	public Movie(String title, Date releaseDate, String description, Date receiveDate, String releaseStatus) {
+
 		this.setTitle(title);
 		this.setReleaseDate(releaseDate);
 		this.setDescription(description);
 		this.setRecieveDate(receiveDate);
 		this.movieStatus = releaseStatus;
+
 	}
 	
 	//Getters
@@ -64,13 +69,19 @@ public class Movie {
 	public void setRecieveDate(Date recieveDate) {
 		this.recieveDate = recieveDate;
 	}
+
 	public void setStatus(status movieStatus) {
 		this.movieStatus = movieStatus;
+
 	}
 
 
 	//Methods
-	@Override public String toString(){
+	/**
+	 * @Override public String toString(){
 		//TODO: FINISH METHOD
 	}
+
+	*/
+
 }

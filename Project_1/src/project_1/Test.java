@@ -43,14 +43,15 @@ public class Test {
 			case ("display"):
 				Movie tempMovie = it.next();
 			System.out.println(tempMovie);
-			System.out.println("display next, edit movie");
+			System.out.println("display next, edit movie, add movie, start showing movies, number of movies before release date, save, exit\n");
 			userInput = scanner.nextLine();
 			break;			
 
 			case ("add"):
 				linkedtest.add(addMovie(linkedtest));
 			System.out.println("display movies, add movies, start showing movies, number of movies before release date, save, exit\n");
-
+			
+			it = linkedtest.listIterator();
 			userInput = scanner.nextLine();
 			break;
 
@@ -78,9 +79,9 @@ public class Test {
 		System.out.println("Please enter the movie description: ");
 		String movieDescription = mScanner.nextLine();
 		System.out.println("Please enter the movie recieve date in mm/dd/yyyy format: ");
-		String movieRecieve = mScanner.nextLine();
-		Date movieRcDate = new SimpleDateFormat("MM/dd/yyyy").parse(movieRecieve);
-		String movieStatus = "RECIEVED";
+		String movieReceive = mScanner.nextLine();
+		Date movieRcDate = new SimpleDateFormat("MM/dd/yyyy").parse(movieReceive);
+		String movieStatus = "RECEIVED";
 
 		Movie movie = new Movie(movieTitle, movieRDate, movieDescription, movieRcDate, movieStatus);
 		return movie;

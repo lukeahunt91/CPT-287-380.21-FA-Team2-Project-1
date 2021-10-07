@@ -9,7 +9,7 @@ public class Movie {
 	private String title;
 	private Date releaseDate;
 	private String description;
-	private Date recieveDate;
+	private Date receiveDate;
 	private enum status { RELEASED, RECEIVED } 
 	private status movieStatus;
 	SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
@@ -21,7 +21,7 @@ public class Movie {
 		this.setTitle(title);
 		this.setReleaseDate(releaseDate);
 		this.setDescription(description);
-		this.setRecieveDate(receiveDate);
+		this.setReceiveDate(receiveDate);
 		this.movieStatus = status.valueOf(releaseStatus);
 		
 	}
@@ -38,8 +38,8 @@ public class Movie {
 		return description;
 	}
 	
-	public String getRecieveDate() {
-		return format.format(recieveDate);
+	public String getReceiveDate() {
+		return format.format(receiveDate);
 	}
 	
 	public String getStatus() {
@@ -59,15 +59,15 @@ public class Movie {
 		this.description = description;
 	}
 
-	public void setRecieveDate(Date recieveDate) {
-		this.recieveDate = recieveDate;
+	public void setReceiveDate(Date receiveDate) {
+		this.receiveDate = receiveDate;
 	}
 	public void setStatus(String movieStatus) {
 		this.movieStatus = status.valueOf(movieStatus);
 	}
 	
 	@Override public String toString() {
-		return getTitle() + " " + getReleaseDate() + " " + getDescription() + " " + getRecieveDate() + " " + getStatus();
+		return getTitle() + " " + getReleaseDate() + " " + getDescription() + " " + getReceiveDate() + " " + getStatus();
 	}
 	
 	

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 
 public class Movie {
 	
+	// Data Fields
 	private String title;
 	private Date releaseDate;
 	private String description;
@@ -15,7 +16,8 @@ public class Movie {
 	private status movieStatus;
 	public SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 	
-	public Movie() {} //Default
+	// Constructors
+	public Movie() {} // Default Constructor
 	
 	public Movie(String title, Date releaseDate, String description, Date receiveDate, String releaseStatus) {
 		this.setTitle(title);
@@ -25,7 +27,16 @@ public class Movie {
 		this.movieStatus = status.valueOf(releaseStatus);
 		
 	}
+	
+	public Movie(Movie other) { // Copy Constructor
+		this.setTitle(other.getTitle());
+		this.setReleaseDate(other.getReleaseDate());
+		this.setDescription(other.getDescription());
+		this.setReceiveDate(other.getReceiveDate());
+		this.movieStatus = status.valueOf(getStatus());
+	}
 
+	// Getters
 	public String getTitle() {
 		return title;
 	}
@@ -46,6 +57,7 @@ public class Movie {
 		return movieStatus.toString();
 	}
 	
+	// Setters
 	public void setTitle(String title) {
 		this.title = title;
 	}

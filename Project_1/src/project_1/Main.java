@@ -66,7 +66,7 @@ public class Main {
 				System.out.println("\n**************************************\n");
 				break;
 			
-			case (2):							
+			case (2):										// Edits movie with a given name
 				MovieListMethods.editMovie(scanner, releasedMovies, receivedMovies, comingIterator);
 				break;
 
@@ -74,8 +74,8 @@ public class Main {
 				MovieListMethods.addMovie(MovieListMethods.userAddMovie(scanner),releasedMovies, receivedMovies, comingIterator);
 				break;
 
-			case(4):							//TODO		// Moves movies from "receivedMovies" with a given release date into "releasedMovies
-				ShowMovies.showMovies(receivedMovies);		
+			case(4):										// Moves movies from "receivedMovies" with a given release date into "releasedMovies
+				MovieListMethods.showMovies(scanner, releasedMovies, showingIterator, receivedMovies, comingIterator);		
 				break;
 				
 			case (5):							//TODO		// Displays movies before a specific release date

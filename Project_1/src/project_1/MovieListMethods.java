@@ -1,5 +1,6 @@
 package project_1;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -163,9 +164,11 @@ public class MovieListMethods {
 			System.out.println("\nEnter date for movies to be moved to released in the form mm/dd/yyyy: ");
 			stringReleaseDate = mScanner.nextLine();
 		}
+		
+		
 		while (comingIterator.hasNext()) {
 			Movie q = comingIterator.next();
-			if (stringReleaseDate.compareTo(q.format.format(q.getReleaseDate()))==0) {
+			if (stringReleaseDate.compareTo(q.format.format(q.getReleaseDate()))<0) {
 				q.setStatus("RELEASED");
 				showingIterator.add(q);
 			}
@@ -180,4 +183,37 @@ public class MovieListMethods {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param mScanner
+	 * @param receivedMovies
+	 * @param comingIterator
+	 */
+	public static void numMoviesComing(Scanner mScanner, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
+		String stringReleaseDate = mScanner.nextLine();
+		int count = 0;
+		
+		while(stringReleaseDate.equals("")) {
+			System.out.println("\nEnter date to display coming movies released before the form mm/dd/yyyy: ");
+			stringReleaseDate = mScanner.nextLine();
+		}
+		
+		try {
+			Date releaseDate = new SimpleDateFormat("MM/dd/yyyy").parse(stringReleaseDate);
+			
+			while (comingIterator.hasNext()) {
+				Movie q = comingIterator.next();
+				if (releaseDate.compareTo(q.getReleaseDate())>0) {
+					count++;
+				}
+			}
+			
+		} catch (ParseException e) {
+			System.out.println("Invalid date.");
+		} // Formatted released date
+		
+		System.out.printf("\n%d coming movies to be released before %s\n\n", count, stringReleaseDate);
+	}
+	
 }

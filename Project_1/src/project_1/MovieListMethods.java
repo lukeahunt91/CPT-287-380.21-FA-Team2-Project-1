@@ -146,5 +146,38 @@ public class MovieListMethods {
 
 	}
 
-
+	/**
+	 * 
+	 * @param mScanner
+	 * @param releasedMovies
+	 * @param showingIterator
+	 * @param receivedMovies
+	 * @param comingIterator
+	 */
+	public static void showMovies(Scanner mScanner, LinkedList<Movie> releasedMovies,
+			ListIterator<Movie> showingIterator, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
+		
+		String stringReleaseDate = mScanner.nextLine();
+		
+		while(stringReleaseDate.equals("")) {
+			System.out.println("\nEnter date for movies to be moved to released in the form mm/dd/yyyy: ");
+			stringReleaseDate = mScanner.nextLine();
+		}
+		while (comingIterator.hasNext()) {
+			Movie q = comingIterator.next();
+			if (stringReleaseDate.compareTo(q.format.format(q.getReleaseDate()))==0) {
+				q.setStatus("RELEASED");
+				showingIterator.add(q);
+			}
+		}
+		
+		comingIterator = receivedMovies.listIterator();
+		
+		while (comingIterator.hasNext()) {
+			Movie q = comingIterator.next();
+			if (q.getStatus().equals("RELEASED")) {
+				comingIterator.remove();
+			}
+		}
+	}
 }

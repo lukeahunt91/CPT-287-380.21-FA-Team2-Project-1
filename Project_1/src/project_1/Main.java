@@ -69,7 +69,7 @@ public class Main {
 				break;
 			
 			case (2):							//TODO			// Edit the selected movie in the "receivedMovies" list
-				System.out.println("\n TODO: FINSH METHOD \n");
+				editMovie(scanner, receivedMovies, comingIterator);
 				break;
 
 			case (3):										// Adds movie to the "receivedMovies" list
@@ -164,9 +164,9 @@ public class Main {
 	}
 	
 	/**
-	 * Uses scanner to prompt user for fields to create a new movie object.
+	 * Uses scanner to prompt user for data to create string array.
 	 * @param mScanner: scanner object for user input
-	 * @return: movie object if no errors occur; {null} otherwise
+	 * @return: string array to be used in addMovie method
 	 */
 	public static String[] userAddMovie(Scanner mScanner){
 		
@@ -193,4 +193,47 @@ public class Main {
 
 	} // End of method
 	
+	/**
+	 * Uses scanner to prompt user for data to edit movie object.
+	 * @param mScanner: scanner object for user input
+	 */
+	public static void editMovie(Scanner mScanner, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
+		
+		String movieTitle = mScanner.nextLine(); // Read title with scanner
+		while(movieTitle.equals("")){
+			System.out.println("Please enter the movie title to edit: "); // Prompt for movie title
+			movieTitle = mScanner.nextLine(); // Read title with scanner
+		}
+		
+		if(receivedMovies.isEmpty()) {
+			System.out.println("Received movie list is empty!");
+			return;
+		} else {
+			
+			while(comingIterator.hasNext()) {
+				Movie q = comingIterator.next();
+				if(movieTitle.equals(q.getTitle())) {
+					System.out.println("Editing: " +q);
+					System.out.printf("\nPlease enter the new title (or Enter to keep %s): ",q.getTitle()); // Prompt for movie title
+					String input = mScanner.nextLine(); // Read title with scanner
+					if(!input.equals("")) {q.setTitle(input);}
+					
+					System.out.printf("\nPlease enter the new release date in the form mm/dd/yyyy (or Enter to keep %s): ", q.format.format(q.getReleaseDate())); // Prompt for movie title
+					input = mScanner.nextLine(); // Read title with scanner
+					if(!input.equals("")) {q.setReleaseDate(input);}
+					
+					System.out.printf("\nPlease enter the new description (or Enter to keep %s): ",q.getDescription()); // Prompt for movie title
+					input = mScanner.nextLine(); // Read title with scanner
+					if(!input.equals("")) {q.setDescription(input);}
+					
+					System.out.printf("\nPlease enter the new received date in the form mm/dd/yyyy (or Enter to keep %s): ", q.format.format(q.getReceiveDate())); // Prompt for movie title
+					input = mScanner.nextLine(); // Read title with scanner
+					if(!input.equals("")) {q.setReceiveDate(input);}
+					
+				}
+			}
+			System.out.println("No movie matching that title.");
+		}
+
+	}
 }

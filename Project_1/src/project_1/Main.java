@@ -14,7 +14,6 @@ public class Main {
 	public static void main(String[] args)throws Exception {
 
 		// Data Fields
-		String stringReadFile; // Name of input file
 		LinkedList<Movie> releasedMovies = new LinkedList<Movie>(); // LinkedList to store released movie objects
 		LinkedList<Movie> receivedMovies = new LinkedList<Movie>(); // LinkedList to store received movie objects
 		
@@ -31,9 +30,11 @@ public class Main {
 
 		while (inputScanner.hasNext()) { // Loop through text file
 
-			stringReadFile = inputScanner.nextLine(); // Read line of text file
+			String stringReadFile = inputScanner.nextLine(); // Read line of text file
 			String[] readFile = stringReadFile.split(", "); // Split text using comma (,)
 			addMovie(readFile, releasedMovies, receivedMovies, comingIterator);
+			showingIterator = releasedMovies.listIterator(); // Reset showing iterator
+			comingIterator = receivedMovies.listIterator(); // Reset coming iterator
 
 		} // End while loop
 
@@ -126,22 +127,32 @@ public class Main {
 			Movie movie = null;
 
 			if (movieStatus.equals("RELEASED")) {
+				
 				movie = new Movie(title, releaseDate, description, receiveDate, movieStatus);
 				releasedMovies.add(movie);
+				return;
+				
 			} else if (movieStatus.equals("RECEIVED")){
-				movie = new Movie(title, releaseDate, description, receiveDate, movieStatus);
-				if(receivedMovies.isEmpty()) {
+				
+				movie = new Movie(title, releaseDate, description, receiveDate, movieStatus); // Create new movie object
+				
+				if(receivedMovies.isEmpty()) { // if empty, add to end of list
 					receivedMovies.add(movie);
+					return;
+					
+				} else { // if not empty
+					while (comingIterator.hasNext()) { // loop through all in list
+						Movie q = comingIterator.next(); // store current movie as a temp object
+						if (movie.getReceiveDate().compareTo(q.getReceiveDate()) < 0) { // if date of new movie is less than or equal to date of current object
+							comingIterator.previous(); // move iterator back one position
+							comingIterator.add(movie); // add before current item
+							return;
+						}
+					} // End while loop
+					receivedMovies.add(movie);
+					return;
 				}
-				while (comingIterator.hasNext()) {
-					Movie q = comingIterator.next();
-					if (q.getReceiveDate().compareTo(movie.getReceiveDate()) >= 0) {
-						movie.next = q;
-						movie.prev = q.prev;
-						q.prev = movie;
-						movie.prev.next = movie;
-					}
-				} // End while loop
+				
 			} 
 
 		}
@@ -178,7 +189,7 @@ public class Main {
 
 		String[] output = { movieTitle, movieRelease, movieDescription, movieReceive, movieStatus };
 
-		return output; // Return string array with error
+		return output; // Return string array
 
 	} // End of method
 	

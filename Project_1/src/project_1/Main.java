@@ -78,8 +78,8 @@ public class Main {
 				MovieListMethods.showMovies(scanner, releasedMovies, showingIterator, receivedMovies, comingIterator);		
 				break;
 				
-			case (5):							//TODO		// Displays movies before a specific release date
-				System.out.println("\n TODO: FINSH METHOD \n");
+			case (5):										// Displays movies before a specific release date
+				MovieListMethods.numMoviesComing(scanner, receivedMovies, comingIterator);
 				break;
 				
 			case (6):							//TODO		//Saves movies to text file

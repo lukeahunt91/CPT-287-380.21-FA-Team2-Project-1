@@ -17,7 +17,7 @@ public class Main {
 		String stringReadFile; // Name of input file
 		LinkedList<Movie> releasedMovies = new LinkedList<Movie>(); // LinkedList to store released movie objects
 		LinkedList<Movie> receivedMovies = new LinkedList<Movie>(); // LinkedList to store received movie objects
-
+		
 		//Open input and output files, create Movie object
 		FileInputStream inputFile = new FileInputStream("Movies.txt");
 		Scanner inputScanner = new Scanner(inputFile);	// Input file scanner
@@ -72,7 +72,7 @@ public class Main {
 				break;
 
 			case (3):										// Adds movie to the "receivedMovies" list
-				userAddMovie(scanner);
+				addMovie(userAddMovie(scanner),releasedMovies, receivedMovies, comingIterator);
 				break;
 
 			case(4):							//TODO		// Moves movies from "receivedMovies" with a given release date into "releasedMovies
@@ -125,12 +125,10 @@ public class Main {
 			String movieStatus = inputString[4]; // Status of movie
 			Movie movie = null;
 
-			switch (movieStatus) {
-			case ("RELEASED"):
+			if (movieStatus.equals("RELEASED")) {
 				movie = new Movie(title, releaseDate, description, receiveDate, movieStatus);
 				releasedMovies.add(movie);
-				break;
-			case ("RECEIVED"):
+			} else if (movieStatus.equals("RECEIVED")){
 				movie = new Movie(title, releaseDate, description, receiveDate, movieStatus);
 				if(receivedMovies.isEmpty()) {
 					receivedMovies.add(movie);
@@ -144,9 +142,7 @@ public class Main {
 						movie.prev.next = movie;
 					}
 				} // End while loop
-
-				break;
-			} // end case/witch
+			} 
 
 		}
 
@@ -162,24 +158,27 @@ public class Main {
 	 * @return: movie object if no errors occur; {null} otherwise
 	 */
 	public static String[] userAddMovie(Scanner mScanner){
-
+		
+		String movieTitle = mScanner.nextLine(); // Read title with scanner
+		while(movieTitle.equals("")){
 			System.out.println("Please enter the movie title: "); // Prompt for movie title
-			String movieTitle = mScanner.nextLine(); // Read title with scanner
-			
-			System.out.println("Please enter the movie release date in mm/dd/yyyy format: "); // Prompt for release date
-			String movieRelease = mScanner.nextLine(); // Read release date with scanner
-			
-			System.out.println("Please enter the movie description: "); // Prompt for description
-			String movieDescription = mScanner.nextLine(); // Read description with scanner
-			
-			System.out.println("Please enter the movie receive date in mm/dd/yyyy format: "); // Prompt for receive date
-			String movieReceive = mScanner.nextLine(); // Read receive date with scanner
-			
-			String movieStatus = "RECEIVED"; // Set movie status to RECEIVED
+			movieTitle = mScanner.nextLine(); // Read title with scanner
+		}
 
-			String[] output = {movieTitle, movieRelease, movieDescription, movieReceive, movieStatus};
-			
-			return output; // Return string array with error
+		System.out.println("Please enter the movie release date in mm/dd/yyyy format: "); // Prompt for release date
+		String movieRelease = mScanner.nextLine(); // Read release date with scanner
+
+		System.out.println("Please enter the movie description: "); // Prompt for description
+		String movieDescription = mScanner.nextLine(); // Read description with scanner
+
+		System.out.println("Please enter the movie receive date in mm/dd/yyyy format: "); // Prompt for receive date
+		String movieReceive = mScanner.nextLine(); // Read receive date with scanner
+
+		String movieStatus = "RECEIVED"; // Set movie status to RECEIVED
+
+		String[] output = { movieTitle, movieRelease, movieDescription, movieReceive, movieStatus };
+
+		return output; // Return string array with error
 
 	} // End of method
 	

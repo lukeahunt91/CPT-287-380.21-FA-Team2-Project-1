@@ -5,16 +5,14 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class AddMovie {
-	
 	/**
 	 * Uses scanner to prompt user for fields to create a new movie object.
+	 * @param mScanner: scanner object for user input
 	 * @return: movie object if no errors occur; {null} otherwise
 	 */
-	public static Movie addMovie(){
+	public static Movie addMovie(Scanner mScanner){
 
 		try {
-			Scanner mScanner = new Scanner(System.in); // Create scanner to read user inputs
-
 			System.out.println("Please enter the movie title: "); // Prompt for movie title
 			String movieTitle = mScanner.nextLine(); // Read title with scanner
 			
@@ -32,7 +30,6 @@ public class AddMovie {
 			String movieStatus = "RECEIVED"; // Set movie status to RECEIVED
 
 			Movie movie = new Movie(movieTitle, movieRDate, movieDescription, movieRcDate, movieStatus); // Create new movie object with input data
-			mScanner.close(); // Close scanner
 			return movie; // Return movie object
 		}
 		

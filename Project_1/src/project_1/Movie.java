@@ -13,7 +13,7 @@ public class Movie {
 	private enum status { RELEASED, RECEIVED } 
 	private status movieStatus;
 	SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-	
+	public Movie next, prev;
 	
 	public Movie() {} //Default
 	

@@ -1,6 +1,7 @@
 package project_1;
 
 import java.util.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 
@@ -12,9 +13,9 @@ public class Movie {
 	private Date receiveDate;
 	private enum status { RELEASED, RECEIVED } 
 	private status movieStatus;
-	SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+	public SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 	
-	public Movie() {} //Default Constructor
+	public Movie() {} //Default
 	
 	public Movie(String title, Date releaseDate, String description, Date receiveDate, String releaseStatus) {
 		this.setTitle(title);
@@ -52,6 +53,14 @@ public class Movie {
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
 	}
+	
+	public void setReleaseDate(String stringReleaseDate) {
+		try {
+				this.releaseDate = format.parse(stringReleaseDate);
+			} catch (ParseException e) {
+				System.out.println("Invalid input"); // Provide error message
+			}
+		}
 
 	public void setDescription(String description) {
 		this.description = description;
@@ -59,6 +68,14 @@ public class Movie {
 
 	public void setReceiveDate(Date receiveDate) {
 		this.receiveDate = receiveDate;
+	}
+	
+	public void setReceiveDate(String stringReceiveDate) {
+		try {
+			this.receiveDate = format.parse(stringReceiveDate);
+		} catch (ParseException e) {
+			System.out.println("Invalid input"); // Provide error message
+		}
 	}
 	
 	public void setStatus(String movieStatus) {

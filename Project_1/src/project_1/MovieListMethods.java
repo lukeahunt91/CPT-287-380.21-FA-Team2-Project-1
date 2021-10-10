@@ -30,11 +30,17 @@ public class MovieListMethods {
 			String movieStatus = inputString[4]; // Status of movie
 			Movie movie = null;
 			
+			// Check if receive date is less than or equal to release date
+			if(receiveDate.compareTo(releaseDate)>=0) {
+				System.out.printf("\nERROR: Release date cannot be less than or equal to receive date.\n%s could not be added.\n\n", title);
+				return;
+			}
+			
 			//check if title already exists in lists
 			while(showingIterator.hasNext()) {
 				movie = showingIterator.next();
 				if(title.equals(movie.getTitle())) {
-					System.out.println("\nERROR: Title already exists in showing list.\n");
+					System.out.printf("\nERROR: Title already exists in showing list.\n%s could not be added.\n\n", title);
 					return;
 				}
 			}
@@ -42,7 +48,7 @@ public class MovieListMethods {
 			while(comingIterator.hasNext()) {
 				movie = comingIterator.next();
 				if(title.equals(movie.getTitle())) {
-					System.out.println("\nERROR: Title already exists in coming list.\n");
+					System.out.printf("\nERROR: Title already exists in showing list.\n%s could not be added.\n\n", title);
 					return;
 				}
 			}
@@ -257,6 +263,7 @@ public class MovieListMethods {
 		}
 		
 		writer.close();
-		outputFile.close();	
+		outputFile.close();
+		
 	}
 }

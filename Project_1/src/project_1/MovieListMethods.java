@@ -1,7 +1,5 @@
 package project_1;
 
-import java.io.FileNotFoundException;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -189,10 +187,9 @@ public class MovieListMethods {
 	 */
 	public static void showMovies(Scanner mScanner, LinkedList<Movie> releasedMovies,
 			ListIterator<Movie> showingIterator, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
-
-		//Create dynamic stringReleaseDate variable to hold releaseDate.
+		
 		String stringReleaseDate = mScanner.nextLine();
-
+		//Create dynamic stringReleaseDate variable to hold releaseDate.
 		while(stringReleaseDate.equals("")) {
 			System.out.println("\nEnter date for movies to be moved to released in the form mm/dd/yyyy: ");
 			stringReleaseDate = mScanner.nextLine();
@@ -201,8 +198,7 @@ public class MovieListMethods {
 		
 		while (comingIterator.hasNext()) {
 			Movie q = comingIterator.next();
-			if (stringReleaseDate.compareTo(q.format.format(q.getReleaseDate())) < 0) {
-
+			if (stringReleaseDate.compareTo(q.format.format(q.getReleaseDate()))==0) {
 				q.setStatus("RELEASED");
 				showingIterator.add(q);
 			}
@@ -234,13 +230,11 @@ public class MovieListMethods {
 		}
 		
 		try {
-
-			//Turn our string release date into SimpleDateFormat and store it in releaseDate variable.
 			Date releaseDate = new SimpleDateFormat("MM/dd/yyyy").parse(stringReleaseDate);
 			
 			while (comingIterator.hasNext()) {
 				Movie q = comingIterator.next();
-				if (releaseDate.compareTo(q.getReleaseDate()) > 0) {
+				if (releaseDate.compareTo(q.getReleaseDate())>0) {
 					count++;
 				}
 			}
@@ -252,21 +246,18 @@ public class MovieListMethods {
 		System.out.printf("\n%d coming movies to be released before %s\n\n", count, stringReleaseDate);
 	}
 	
-	public static void saveMovies(ListIterator<Movie> comingIterator, ListIterator<Movie> showingIterator) throws IOException {
+	public static void saveMovies(String fileName, ListIterator<Movie> comingIterator, ListIterator<Movie> showingIterator) throws IOException {
 		
-		FileOutputStream outputFile = new FileOutputStream("Project_1/Movies.txt");
+		FileOutputStream outputFile = new FileOutputStream(fileName);
 		PrintWriter writer = new PrintWriter(outputFile);
 		Movie tempMovie;
-
-		//While the showingIterator has data, assign that data to tempMovie and write it to our file.
+		//While the comingIterator has data, assign that data to tempMovie and write it to our file.
 		//Using the insertComma() method allows the file to be read later.
-		while (showingIterator.hasNext()) {
+		while (showingIterator.hasNext()) { 
 			tempMovie = showingIterator.next();
 			writer.println(tempMovie.insertCommas());
 			
 		}
-		//While the comingIterator has data, assign that data to tempMovie and write it to our file.
-		//Using the insertComma() method allows the file to be read later.
 		while (comingIterator.hasNext()) { 
 			tempMovie = comingIterator.next();
 			writer.println(tempMovie.insertCommas());
@@ -274,7 +265,5 @@ public class MovieListMethods {
 		
 		writer.close();
 		outputFile.close();
-		
-		
 	}
 }

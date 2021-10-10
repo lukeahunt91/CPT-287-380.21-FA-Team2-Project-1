@@ -171,7 +171,7 @@ public class MovieListMethods {
 		
 		while (comingIterator.hasNext()) {
 			Movie q = comingIterator.next();
-			if (stringReleaseDate.compareTo(q.format.format(q.getReleaseDate()))<0) {
+			if (stringReleaseDate.compareTo(q.format.format(q.getReleaseDate()))==0) {
 				q.setStatus("RELEASED");
 				showingIterator.add(q);
 			}

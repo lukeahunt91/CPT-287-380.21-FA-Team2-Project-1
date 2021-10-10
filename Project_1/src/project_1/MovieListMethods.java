@@ -19,7 +19,7 @@ public class MovieListMethods {
 	 * @param receivedMovies: LinkedList containing received movies.
 	 * @param comingIterator: ListIterator for the coming (received) movie LinkedList.
 	 */
-	public static void addMovie(String[] inputString, LinkedList<Movie> releasedMovies, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
+	public static void addMovie(String[] inputString, LinkedList<Movie> releasedMovies, ListIterator<Movie> showingIterator, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
 		try {
 			String title = inputString[0]; // Store title
 			String stringReleaseDate = inputString[1]; // Store release date
@@ -29,6 +29,27 @@ public class MovieListMethods {
 			Date receiveDate = new SimpleDateFormat("MM/dd/yyyy").parse(stringReceiveDate); // Formatted received date
 			String movieStatus = inputString[4]; // Status of movie
 			Movie movie = null;
+			
+			//check if title already exists in lists
+			while(showingIterator.hasNext()) {
+				movie = showingIterator.next();
+				if(title.equals(movie.getTitle())) {
+					System.out.println("\nERROR: Title already exists in showing list.\n");
+					return;
+				}
+			}
+			
+			while(comingIterator.hasNext()) {
+				movie = comingIterator.next();
+				if(title.equals(movie.getTitle())) {
+					System.out.println("\nERROR: Title already exists in coming list.\n");
+					return;
+				}
+			}
+			
+			//reset iterators
+			showingIterator = releasedMovies.listIterator();
+			comingIterator = receivedMovies.listIterator();
 
 			if (movieStatus.equals("RELEASED")) {
 				
@@ -101,7 +122,7 @@ public class MovieListMethods {
 	 * Uses scanner to prompt user for data to edit movie object.
 	 * @param mScanner: scanner object for user input
 	 */
-	public static void editMovie(Scanner mScanner, LinkedList<Movie> releasedMovies, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
+	public static void editMovie(Scanner mScanner, LinkedList<Movie> releasedMovies, ListIterator<Movie> showingIterator, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
 		
 		String movieTitle = mScanner.nextLine(); // Read title with scanner
 		while(movieTitle.equals("")){
@@ -139,7 +160,7 @@ public class MovieListMethods {
 				
 					comingIterator.remove();
 					comingIterator = receivedMovies.listIterator();
-					addMovie(input, releasedMovies, receivedMovies, comingIterator);
+					addMovie(input, releasedMovies, showingIterator, receivedMovies, comingIterator);
 					System.out.println();
 					return;
 					
@@ -236,11 +257,6 @@ public class MovieListMethods {
 		}
 		
 		writer.close();
-		outputFile.close();
-		
-		
+		outputFile.close();	
 	}
-	
-	
-	
 }

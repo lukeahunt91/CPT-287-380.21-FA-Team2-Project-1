@@ -34,7 +34,7 @@ public class Main {
 
 		} // End while loop
 		
-		scanner.close(); // close file scanner
+		inputScanner.close(); // close file scanner
 		inputFile.close(); // close input file
 
 		showingIterator = releasedMovies.listIterator(); // Reset showing iterator
@@ -100,7 +100,7 @@ public class Main {
 		} // End while loop
 		
 		//Close input scanner
-		inputScanner.close();
+		scanner.close();
 		
 	}	
 }

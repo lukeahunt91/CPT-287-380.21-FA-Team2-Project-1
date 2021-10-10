@@ -28,7 +28,7 @@ public class Main {
 
 			String stringReadFile = inputScanner.nextLine(); // Read line of text file
 			String[] readFile = stringReadFile.split(", "); // Split text using comma (,)
-			MovieListMethods.addMovie(readFile, releasedMovies, receivedMovies, comingIterator);
+			MovieListMethods.addMovie(readFile, releasedMovies, showingIterator, receivedMovies, comingIterator);
 			showingIterator = releasedMovies.listIterator(); // Reset showing iterator
 			comingIterator = receivedMovies.listIterator(); // Reset coming iterator
 
@@ -68,11 +68,11 @@ public class Main {
 				break;
 			
 			case (2):										// Edits movie with a given name
-				MovieListMethods.editMovie(scanner, releasedMovies, receivedMovies, comingIterator);
+				MovieListMethods.editMovie(scanner, releasedMovies, showingIterator, receivedMovies, comingIterator);
 				break;
 
 			case (3):										// Adds movie to the "receivedMovies" list
-				MovieListMethods.addMovie(MovieListMethods.userAddMovie(scanner),releasedMovies, receivedMovies, comingIterator);
+				MovieListMethods.addMovie(MovieListMethods.userAddMovie(scanner),releasedMovies, showingIterator, receivedMovies, comingIterator);
 				break;
 
 			case(4):										// Moves movies from "receivedMovies" with a given release date into "releasedMovies

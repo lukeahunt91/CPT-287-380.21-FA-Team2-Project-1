@@ -98,5 +98,11 @@ public class Movie {
 		return getTitle() + " " + format.format(getReleaseDate()) + " " + getDescription() + " " + format.format(getReceiveDate()) + " " + getStatus();
 	}
 	
+	public String insertCommas() {
+		return getTitle() + ", " + format.format(getReleaseDate()) + ", " + getDescription() + ", " + format.format(getReceiveDate()) + ", " + getStatus();
+
+		
+	}
+	
 	
 }

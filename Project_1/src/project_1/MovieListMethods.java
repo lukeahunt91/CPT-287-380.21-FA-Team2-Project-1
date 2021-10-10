@@ -216,4 +216,28 @@ public class MovieListMethods {
 		System.out.printf("\n%d coming movies to be released before %s\n\n", count, stringReleaseDate);
 	}
 	
+	public static void saveMovies(ListIterator<Movie> comingIterator, ListIterator<Movie> showingIterator) {
+		
+		FileOutputStream outputFile = new FileOutputStream("Project_1/Movies1.txt");
+		PrintWriter writer = new PrintWriter(outputFile);
+		Movie tempMovie;
+		
+		while (showingIterator.hasNext()) { 
+			tempMovie = showingIterator.next();
+			writer.println(tempMovie.insertCommas());
+			
+		}
+		while (comingIterator.hasNext()) { 
+			tempMovie = comingIterator.next();
+			writer.println(tempMovie.insertCommas());
+		}
+		
+		writer.close();
+		outputFile.close();
+		
+		
+	}
+	
+	
+	
 }

@@ -82,8 +82,13 @@ public class Main {
 				MovieListMethods.numMoviesComing(scanner, receivedMovies, comingIterator);
 				break;
 				
-			case (6):							//TODO		//Saves movies to text file
-				System.out.println("\n TODO: FINSH METHOD \n");
+			case (6):									//Saves movies to text file
+				
+				MovieListMethods.saveMovies(comingIterator, showingIterator);
+			
+					
+			
+			
 				break;
 				
 			default:

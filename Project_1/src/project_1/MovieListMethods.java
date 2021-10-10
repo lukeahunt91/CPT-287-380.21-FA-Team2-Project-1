@@ -1,5 +1,8 @@
 package project_1;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -215,5 +218,29 @@ public class MovieListMethods {
 		
 		System.out.printf("\n%d coming movies to be released before %s\n\n", count, stringReleaseDate);
 	}
+	
+	public static void saveMovies(String fileName, ListIterator<Movie> comingIterator, ListIterator<Movie> showingIterator) throws IOException {
+		
+		FileOutputStream outputFile = new FileOutputStream(fileName);
+		PrintWriter writer = new PrintWriter(outputFile);
+		Movie tempMovie;
+		
+		while (showingIterator.hasNext()) { 
+			tempMovie = showingIterator.next();
+			writer.println(tempMovie.insertCommas());
+			
+		}
+		while (comingIterator.hasNext()) { 
+			tempMovie = comingIterator.next();
+			writer.println(tempMovie.insertCommas());
+		}
+		
+		writer.close();
+		outputFile.close();
+		
+		
+	}
+	
+	
 	
 }

@@ -1,5 +1,8 @@
 package project_1;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,7 +19,7 @@ public class MovieListMethods {
 	 * @param receivedMovies: LinkedList containing received movies.
 	 * @param comingIterator: ListIterator for the coming (received) movie LinkedList.
 	 */
-	public static void addMovie(String[] inputString, LinkedList<Movie> releasedMovies, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
+	public static void addMovie(String[] inputString, LinkedList<Movie> releasedMovies, ListIterator<Movie> showingIterator, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
 		try {
 			String title = inputString[0]; // Store title
 			String stringReleaseDate = inputString[1]; // Store release date
@@ -26,6 +29,33 @@ public class MovieListMethods {
 			Date receiveDate = new SimpleDateFormat("MM/dd/yyyy").parse(stringReceiveDate); // Formatted received date
 			String movieStatus = inputString[4]; // Status of movie
 			Movie movie = null;
+			
+			// Check if receive date is less than or equal to release date
+			if(receiveDate.compareTo(releaseDate)>=0) {
+				System.out.printf("\nERROR: Release date cannot be less than or equal to receive date.\n%s could not be added.\n\n", title);
+				return;
+			}
+			
+			//check if title already exists in lists
+			while(showingIterator.hasNext()) {
+				movie = showingIterator.next();
+				if(title.equals(movie.getTitle())) {
+					System.out.printf("\nERROR: Title already exists in showing list.\n%s could not be added.\n\n", title);
+					return;
+				}
+			}
+			
+			while(comingIterator.hasNext()) {
+				movie = comingIterator.next();
+				if(title.equals(movie.getTitle())) {
+					System.out.printf("\nERROR: Title already exists in showing list.\n%s could not be added.\n\n", title);
+					return;
+				}
+			}
+			
+			//reset iterators
+			showingIterator = releasedMovies.listIterator();
+			comingIterator = receivedMovies.listIterator();
 
 			if (movieStatus.equals("RELEASED")) {
 				
@@ -98,7 +128,7 @@ public class MovieListMethods {
 	 * Uses scanner to prompt user for data to edit movie object.
 	 * @param mScanner: scanner object for user input
 	 */
-	public static void editMovie(Scanner mScanner, LinkedList<Movie> releasedMovies, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
+	public static void editMovie(Scanner mScanner, LinkedList<Movie> releasedMovies, ListIterator<Movie> showingIterator, LinkedList<Movie> receivedMovies, ListIterator<Movie> comingIterator) {
 		
 		String movieTitle = mScanner.nextLine(); // Read title with scanner
 		while(movieTitle.equals("")){
@@ -136,7 +166,7 @@ public class MovieListMethods {
 				
 					comingIterator.remove();
 					comingIterator = receivedMovies.listIterator();
-					addMovie(input, releasedMovies, receivedMovies, comingIterator);
+					addMovie(input, releasedMovies, showingIterator, receivedMovies, comingIterator);
 					System.out.println();
 					return;
 					
@@ -168,7 +198,7 @@ public class MovieListMethods {
 		
 		while (comingIterator.hasNext()) {
 			Movie q = comingIterator.next();
-			if (stringReleaseDate.compareTo(q.format.format(q.getReleaseDate()))<0) {
+			if (stringReleaseDate.compareTo(q.format.format(q.getReleaseDate()))==0) {
 				q.setStatus("RELEASED");
 				showingIterator.add(q);
 			}
@@ -216,4 +246,24 @@ public class MovieListMethods {
 		System.out.printf("\n%d coming movies to be released before %s\n\n", count, stringReleaseDate);
 	}
 	
+	public static void saveMovies(String fileName, ListIterator<Movie> comingIterator, ListIterator<Movie> showingIterator) throws IOException {
+		
+		FileOutputStream outputFile = new FileOutputStream(fileName);
+		PrintWriter writer = new PrintWriter(outputFile);
+		Movie tempMovie;
+		
+		while (showingIterator.hasNext()) { 
+			tempMovie = showingIterator.next();
+			writer.println(tempMovie.insertCommas());
+			
+		}
+		while (comingIterator.hasNext()) { 
+			tempMovie = comingIterator.next();
+			writer.println(tempMovie.insertCommas());
+		}
+		
+		writer.close();
+		outputFile.close();
+		
+	}
 }

@@ -1,8 +1,6 @@
 package project_1;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -16,11 +14,11 @@ public class Main {
 		LinkedList<Movie> receivedMovies = new LinkedList<Movie>(); // LinkedList to store received movie objects
 		
 		//Open input and output files, create Movie object
-		FileInputStream inputFile = new FileInputStream("Movies.txt");
+		String inOutFileName = "Movies.txt";
+		FileInputStream inputFile = new FileInputStream(inOutFileName);
 		Scanner inputScanner = new Scanner(inputFile);	// Input file scanner
 		Scanner scanner = new Scanner(System.in);		// User entry scanner
-		FileOutputStream outputFile = new FileOutputStream("Movies1.txt");
-		PrintWriter writer = new PrintWriter(outputFile);
+
 		Movie tempMovie;
 		
 		ListIterator<Movie> showingIterator = releasedMovies.listIterator();	// ListIterator for released movies (showing)
@@ -30,11 +28,14 @@ public class Main {
 
 			String stringReadFile = inputScanner.nextLine(); // Read line of text file
 			String[] readFile = stringReadFile.split(", "); // Split text using comma (,)
-			MovieListMethods.addMovie(readFile, releasedMovies, receivedMovies, comingIterator);
+			MovieListMethods.addMovie(readFile, releasedMovies, showingIterator, receivedMovies, comingIterator);
 			showingIterator = releasedMovies.listIterator(); // Reset showing iterator
 			comingIterator = receivedMovies.listIterator(); // Reset coming iterator
 
 		} // End while loop
+		
+		inputScanner.close(); // close file scanner
+		inputFile.close(); // close input file
 
 		showingIterator = releasedMovies.listIterator(); // Reset showing iterator
 		comingIterator = receivedMovies.listIterator(); // Reset coming iterator
@@ -67,11 +68,11 @@ public class Main {
 				break;
 			
 			case (2):										// Edits movie with a given name
-				MovieListMethods.editMovie(scanner, releasedMovies, receivedMovies, comingIterator);
+				MovieListMethods.editMovie(scanner, releasedMovies, showingIterator, receivedMovies, comingIterator);
 				break;
 
 			case (3):										// Adds movie to the "receivedMovies" list
-				MovieListMethods.addMovie(MovieListMethods.userAddMovie(scanner),releasedMovies, receivedMovies, comingIterator);
+				MovieListMethods.addMovie(MovieListMethods.userAddMovie(scanner),releasedMovies, showingIterator, receivedMovies, comingIterator);
 				break;
 
 			case(4):										// Moves movies from "receivedMovies" with a given release date into "releasedMovies
@@ -82,8 +83,8 @@ public class Main {
 				MovieListMethods.numMoviesComing(scanner, receivedMovies, comingIterator);
 				break;
 				
-			case (6):							//TODO		//Saves movies to text file
-				System.out.println("\n TODO: FINSH METHOD \n");
+			case (6):										//Saves movies to text file
+				MovieListMethods.saveMovies(inOutFileName, comingIterator, showingIterator);
 				break;
 				
 			default:
@@ -98,11 +99,8 @@ public class Main {
 			
 		} // End while loop
 		
-		//Close files
-		writer.close();
-		outputFile.close();
-		inputScanner.close();
+		//Close input scanner
 		scanner.close();
-		inputFile.close();
+		
 	}	
 }

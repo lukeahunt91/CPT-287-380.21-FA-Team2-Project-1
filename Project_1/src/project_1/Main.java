@@ -16,11 +16,13 @@ public class Main {
 		LinkedList<Movie> receivedMovies = new LinkedList<Movie>(); // LinkedList to store received movie objects
 		
 		//Open input and output files, create Movie object
-		FileInputStream inputFile = new FileInputStream("Movies.txt");
+		FileInputStream inputFile = new FileInputStream("Project_1/Movies.txt");
 		Scanner inputScanner = new Scanner(inputFile);	// Input file scanner
 		Scanner scanner = new Scanner(System.in);		// User entry scanner
-		FileOutputStream outputFile = new FileOutputStream("Movies1.txt");
-		PrintWriter writer = new PrintWriter(outputFile);
+
+
+		//FileOutputStream outputFile = new FileOutputStream("Project_1/Movies.txt");
+		//PrintWriter writer = new PrintWriter(outputFile);
 		Movie tempMovie;
 		
 		ListIterator<Movie> showingIterator = releasedMovies.listIterator();	// ListIterator for released movies (showing)
@@ -104,8 +106,8 @@ public class Main {
 		} // End while loop
 		
 		//Close files
-		writer.close();
-		outputFile.close();
+		//writer.close();
+		//outputFile.close();
 		inputScanner.close();
 		scanner.close();
 		inputFile.close();

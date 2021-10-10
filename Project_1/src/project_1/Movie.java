@@ -27,14 +27,14 @@ public class Movie {
 		this.movieStatus = status.valueOf(releaseStatus);
 		
 	}
-	
-	public Movie(Movie other) { // Copy Constructor
+
+	/**	public Movie(Movie other) { // Copy Constructor
 		this.setTitle(other.getTitle());
 		this.setReleaseDate(other.getReleaseDate());
 		this.setDescription(other.getDescription());
 		this.setReceiveDate(other.getReceiveDate());
 		this.movieStatus = status.valueOf(getStatus());
-	}
+	}*/
 
 	// Getters
 	public String getTitle() {
@@ -97,7 +97,8 @@ public class Movie {
 	@Override public String toString() {
 		return getTitle() + " " + format.format(getReleaseDate()) + " " + getDescription() + " " + format.format(getReceiveDate()) + " " + getStatus();
 	}
-	
+
+	//Added a method to re-insert commas back into the line so it can be read later when saving.
 	public String insertCommas() {
 		return getTitle() + ", " + format.format(getReleaseDate()) + ", " + getDescription() + ", " + format.format(getReceiveDate()) + ", " + getStatus();
 

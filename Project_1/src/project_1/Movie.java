@@ -101,6 +101,6 @@ public class Movie {
 	public String insertCommas() {
 		return getTitle() + ", " + format.format(getReleaseDate()) + ", " + getDescription() + ", " + format.format(getReceiveDate()) + ", " + getStatus();
 	}
-	
+
 	
 }

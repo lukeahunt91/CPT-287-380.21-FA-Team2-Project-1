@@ -14,8 +14,8 @@ public class Main {
 		LinkedList<Movie> receivedMovies = new LinkedList<Movie>(); // LinkedList to store received movie objects
 		
 		//Open input and output files, create Movie object
-		String inOutFileName = "Movies.txt";
-		FileInputStream inputFile = new FileInputStream(inOutFileName);
+
+		FileInputStream inputFile = new FileInputStream("Project_1/Movies.txt");
 		Scanner inputScanner = new Scanner(inputFile);	// Input file scanner
 		Scanner scanner = new Scanner(System.in);		// User entry scanner
 
@@ -83,9 +83,12 @@ public class Main {
 				MovieListMethods.numMoviesComing(scanner, receivedMovies, comingIterator);
 				break;
 				
-			case (6):										//Saves movies to text file
-				MovieListMethods.saveMovies(inOutFileName, comingIterator, showingIterator);
-				break;
+
+			case (6):									//Saves movies to text file
+				
+				MovieListMethods.saveMovies(comingIterator, showingIterator);
+			
+
 				
 			default:
 				System.out.println("Invalid Input\n");
@@ -99,8 +102,12 @@ public class Main {
 			
 		} // End while loop
 		
-		//Close input scanner
-		scanner.close();
+
+		//Close files
+		//writer.close();
+		//outputFile.close();
+		inputScanner.close();
+
 		
 	}	
 }

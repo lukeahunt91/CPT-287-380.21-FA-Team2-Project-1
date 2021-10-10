@@ -1,0 +1,132 @@
+Index: Project_1/src/project_1/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package project_1;\r\n\r\nimport java.io.FileInputStream;\r\nimport java.io.FileOutputStream;\r\nimport java.io.PrintWriter;\r\nimport java.util.LinkedList;\r\nimport java.util.ListIterator;\r\nimport java.util.Scanner;\r\n\r\npublic class Main {\r\n\t\r\n\tpublic static void main(String[] args)throws Exception {\r\n\r\n\t\t// Data Fields\r\n\t\tLinkedList<Movie> releasedMovies = new LinkedList<Movie>(); // LinkedList to store released movie objects\r\n\t\tLinkedList<Movie> receivedMovies = new LinkedList<Movie>(); // LinkedList to store received movie objects\r\n\t\t\r\n\t\t//Open input and output files, create Movie object\r\n\t\tFileInputStream inputFile = new FileInputStream(\"Movies.txt\");\r\n\t\tScanner inputScanner = new Scanner(inputFile);\t// Input file scanner\r\n\t\tScanner scanner = new Scanner(System.in);\t\t// User entry scanner\r\n\t\tFileOutputStream outputFile = new FileOutputStream(\"Movies1.txt\");\r\n\t\tPrintWriter writer = new PrintWriter(outputFile);\r\n\t\tMovie tempMovie;\r\n\t\t\r\n\t\tListIterator<Movie> showingIterator = releasedMovies.listIterator();\t// ListIterator for released movies (showing)\r\n\t\tListIterator<Movie> comingIterator = receivedMovies.listIterator();\t\t// ListIterator for received movies (coming)\r\n\r\n\t\twhile (inputScanner.hasNext()) { // Loop through text file\r\n\r\n\t\t\tString stringReadFile = inputScanner.nextLine(); // Read line of text file\r\n\t\t\tString[] readFile = stringReadFile.split(\", \"); // Split text using comma (,)\r\n\t\t\tMovieListMethods.addMovie(readFile, releasedMovies, receivedMovies, comingIterator);\r\n\t\t\tshowingIterator = releasedMovies.listIterator(); // Reset showing iterator\r\n\t\t\tcomingIterator = receivedMovies.listIterator(); // Reset coming iterator\r\n\r\n\t\t} // End while loop\r\n\r\n\t\tshowingIterator = releasedMovies.listIterator(); // Reset showing iterator\r\n\t\tcomingIterator = receivedMovies.listIterator(); // Reset coming iterator\r\n\t\t\r\n\t\tString menuText = \"What would you like to do?\\n\" +\r\n\t\t\t\t\"(1) Display movies, (2) Edit movie, (3) Add movie, (4) Start showing movies\\n\" +\r\n\t\t\t\t\"(5) Display number of movies before release date, (6) Save, (7) Exit\\n\";\r\n\t\t\r\n\t\tSystem.out.println(menuText);\r\n\t\tint userInput = scanner.nextInt();\r\n\r\n\t\twhile(userInput != 7) {\r\n\r\n\t\t\tswitch (userInput) {\r\n\r\n\t\t\tcase (1):\t\t\t\t\t\t\t\t\t\t//Iterate and display movies in the two lists\t\t\t\t\r\n\t\t\t\t\r\n\t\t\t\tSystem.out.println(\"\\n********* Movies Now Showing *********\\n\");\r\n\t\t\t\twhile (showingIterator.hasNext()) { // Iterate through all movies\r\n\t\t\t\t\ttempMovie = showingIterator.next();\r\n\t\t\t\t\tSystem.out.println(tempMovie);\r\n\t\t\t\t}\r\n\r\n\t\t\t\tSystem.out.println(\"\\n********* Movies Coming Soon *********\\n\");\r\n\t\t\t\twhile (comingIterator.hasNext()) { // Iterate through all movies\r\n\t\t\t\t\ttempMovie = comingIterator.next();\r\n\t\t\t\t\tSystem.out.println(tempMovie);\r\n\t\t\t\t}\r\n\t\t\t\tSystem.out.println(\"\\n**************************************\\n\");\r\n\t\t\t\tbreak;\r\n\t\t\t\r\n\t\t\tcase (2):\t\t\t\t\t\t\t\t\t\t// Edits movie with a given name\r\n\t\t\t\tMovieListMethods.editMovie(scanner, releasedMovies, receivedMovies, comingIterator);\r\n\t\t\t\tbreak;\r\n\r\n\t\t\tcase (3):\t\t\t\t\t\t\t\t\t\t// Adds movie to the \"receivedMovies\" list\r\n\t\t\t\tMovieListMethods.addMovie(MovieListMethods.userAddMovie(scanner),releasedMovies, receivedMovies, comingIterator);\r\n\t\t\t\tbreak;\r\n\r\n\t\t\tcase(4):\t\t\t\t\t\t\t\t\t\t// Moves movies from \"receivedMovies\" with a given release date into \"releasedMovies\r\n\t\t\t\tMovieListMethods.showMovies(scanner, releasedMovies, showingIterator, receivedMovies, comingIterator);\t\t\r\n\t\t\t\tbreak;\r\n\t\t\t\t\r\n\t\t\tcase (5):\t\t\t\t\t\t\t\t\t\t// Displays movies before a specific release date\r\n\t\t\t\tMovieListMethods.numMoviesComing(scanner, receivedMovies, comingIterator);\r\n\t\t\t\tbreak;\r\n\t\t\t\t\r\n\t\t\tcase (6):\t\t\t\t\t\t\t//TODO\t\t//Saves movies to text file\r\n\t\t\t\tSystem.out.println(\"\\n TODO: FINSH METHOD \\n\");\r\n\t\t\t\tbreak;\r\n\t\t\t\t\r\n\t\t\tdefault:\r\n\t\t\t\tSystem.out.println(\"Invalid Input\\n\");\r\n\t\t\t\tbreak;\r\n\t\t\t} // End case/switch\r\n\t\t\t\r\n\t\t\tshowingIterator = releasedMovies.listIterator(); // Reset showing iterator\r\n\t\t\tcomingIterator = receivedMovies.listIterator(); // Reset coming iterator\r\n\t\t\tSystem.out.println(menuText); // Print menu\r\n\t\t\tuserInput = scanner.nextInt(); // Read user input\r\n\t\t\t\r\n\t\t} // End while loop\r\n\t\t\r\n\t\t//Close files\r\n\t\twriter.close();\r\n\t\toutputFile.close();\r\n\t\tinputScanner.close();\r\n\t\tscanner.close();\r\n\t\tinputFile.close();\r\n\t}\t\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Project_1/src/project_1/Main.java b/Project_1/src/project_1/Main.java
+--- a/Project_1/src/project_1/Main.java	(revision 4a448bca35c614f25bd40a07211fcd5ec5498d79)
++++ b/Project_1/src/project_1/Main.java	(date 1633893489360)
+@@ -16,10 +16,10 @@
+ 		LinkedList<Movie> receivedMovies = new LinkedList<Movie>(); // LinkedList to store received movie objects
+ 		
+ 		//Open input and output files, create Movie object
+-		FileInputStream inputFile = new FileInputStream("Movies.txt");
++		FileInputStream inputFile = new FileInputStream("Project_1/Movies.txt");
+ 		Scanner inputScanner = new Scanner(inputFile);	// Input file scanner
+ 		Scanner scanner = new Scanner(System.in);		// User entry scanner
+-		FileOutputStream outputFile = new FileOutputStream("Movies1.txt");
++		FileOutputStream outputFile = new FileOutputStream("Project_1/Movies1.txt");
+ 		PrintWriter writer = new PrintWriter(outputFile);
+ 		Movie tempMovie;
+ 		
+Index: .idea/CPT-287-380.21-FA-Team2-Project-1.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/CPT-287-380.21-FA-Team2-Project-1.iml b/.idea/CPT-287-380.21-FA-Team2-Project-1.iml
+new file mode 100644
+--- /dev/null	(date 1633893117983)
++++ b/.idea/CPT-287-380.21-FA-Team2-Project-1.iml	(date 1633893117983)
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <output url="file://$MODULE_DIR$/out" />
++    <output-test url="file:///test/CPT-287-380.21-FA-Team2-Project-1" />
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/Project_1/src" isTestSource="false" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1633891377903)
++++ b/.idea/modules.xml	(date 1633891377903)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/CPT-287-380.21-FA-Team2-Project-1.iml" filepath="$PROJECT_DIR$/.idea/CPT-287-380.21-FA-Team2-Project-1.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1633891377937)
++++ b/.idea/misc.xml	(date 1633891377937)
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="16" project-jdk-type="JavaSDK" />
++</project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1633891377954)
++++ b/.idea/vcs.xml	(date 1633891377954)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/runConfigurations.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/runConfigurations.xml b/.idea/runConfigurations.xml
+new file mode 100644
+--- /dev/null	(date 1633891377974)
++++ b/.idea/runConfigurations.xml	(date 1633891377974)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RunConfigurationProducerService">
++    <option name="ignoredProducers">
++      <set>
++        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
++      </set>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1633891378217)
++++ b/.idea/.gitignore	(date 1633891378217)
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml

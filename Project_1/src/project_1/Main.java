@@ -1,8 +1,6 @@
 package project_1;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -16,11 +14,11 @@ public class Main {
 		LinkedList<Movie> receivedMovies = new LinkedList<Movie>(); // LinkedList to store received movie objects
 		
 		//Open input and output files, create Movie object
-		FileInputStream inputFile = new FileInputStream("Movies.txt");
+		String inOutFileName = "Movies.txt";
+		FileInputStream inputFile = new FileInputStream(inOutFileName);
 		Scanner inputScanner = new Scanner(inputFile);	// Input file scanner
 		Scanner scanner = new Scanner(System.in);		// User entry scanner
-		FileOutputStream outputFile = new FileOutputStream("Movies1.txt");
-		PrintWriter writer = new PrintWriter(outputFile);
+
 		Movie tempMovie;
 		
 		ListIterator<Movie> showingIterator = releasedMovies.listIterator();	// ListIterator for released movies (showing)
@@ -35,6 +33,9 @@ public class Main {
 			comingIterator = receivedMovies.listIterator(); // Reset coming iterator
 
 		} // End while loop
+		
+		scanner.close(); // close file scanner
+		inputFile.close(); // close input file
 
 		showingIterator = releasedMovies.listIterator(); // Reset showing iterator
 		comingIterator = receivedMovies.listIterator(); // Reset coming iterator
@@ -82,8 +83,8 @@ public class Main {
 				MovieListMethods.numMoviesComing(scanner, receivedMovies, comingIterator);
 				break;
 				
-			case (6):							//TODO		//Saves movies to text file
-				System.out.println("\n TODO: FINSH METHOD \n");
+			case (6):										//Saves movies to text file
+				MovieListMethods.saveMovies(inOutFileName, comingIterator, showingIterator);
 				break;
 				
 			default:
@@ -98,11 +99,8 @@ public class Main {
 			
 		} // End while loop
 		
-		//Close files
-		writer.close();
-		outputFile.close();
+		//Close input scanner
 		inputScanner.close();
-		scanner.close();
-		inputFile.close();
+		
 	}	
 }

@@ -95,14 +95,6 @@ public class Movie {
 	}
 	
 	@Override public String toString() {
-		return getTitle() + " " + format.format(getReleaseDate()) + " " + getDescription() + " " + format.format(getReceiveDate()) + " " + getStatus();
-	}
-	
-	public String insertCommas() {
 		return getTitle() + ", " + format.format(getReleaseDate()) + ", " + getDescription() + ", " + format.format(getReceiveDate()) + ", " + getStatus();
-
-		
 	}
-	
-	
 }

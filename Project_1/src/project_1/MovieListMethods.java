@@ -255,12 +255,12 @@ public class MovieListMethods {
 		//Using the insertComma() method allows the file to be read later.
 		while (showingIterator.hasNext()) { 
 			tempMovie = showingIterator.next();
-			writer.println(tempMovie.insertCommas());
+			writer.println(tempMovie);
 			
 		}
 		while (comingIterator.hasNext()) { 
 			tempMovie = comingIterator.next();
-			writer.println(tempMovie.insertCommas());
+			writer.println(tempMovie);
 		}
 		
 		writer.close();

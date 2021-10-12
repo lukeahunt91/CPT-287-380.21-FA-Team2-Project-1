@@ -1,7 +1,7 @@
 Glass, 01/18/2019, Drama/Fantasy, 01/12/2019, RELEASED
 Miss Bala, 02/01/2019, Mystery/Thriller, 01/17/2019, RECEIVED
 Halloween, 10/25/1978, Horror/Slasher, 10/01/1978, RELEASED
-Halloween II, 10/30/1981, Horror/Shasher, 10/03/1981, RELEASED
+Halloween II, 10/30/1981, Horror/Slasher, 10/03/1981, RELEASED
 Halloween Kills, 10/15/2021, Horror/Slasher, 10/01/1981, RECEIVED
 A Nightmare on Elm Street, Supernatural/Slasher, 11/09,2984, RELEASED
 Movie F, 10/04/2021, Mystery, 09/28/2021, RELEASED

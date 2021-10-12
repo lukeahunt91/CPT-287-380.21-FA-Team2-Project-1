@@ -1,14 +1,13 @@
 Glass, 01/18/2019, Drama/Fantasy, 01/12/2019, RELEASED
-Release Movie 1, 12/12/1212, Mystery, 12/12/1212, RELEASED
-Movie A, 02/01/2019, Drama/Fantasy, 01/01/2019, RELEASED
-Movie B, 02/02/2019, Mystery/Thriller, 01/02/2019, RELEASED
-Movie C, 02/02/2019, Mystery/Thriller, 01/02/2019, RELEASED
-Movie D, 02/02/2019, Mystery/Thriller, 01/02/2019, RELEASED
-Movie E, 02/02/2019, Mystery/Thriller, 01/02/2019, RELEASED
-Movie 2, 02/03/2019, Drama/Fantasy, 01/10/2019, RECEIVED
-Movie 1, 02/11/2019, Drama/Fantasy, 01/10/2019, RECEIVED
-Movie 4, 02/04/2019, Drama/Fantasy, 01/11/2019, RECEIVED
-Movie 6, 02/04/2019, Drama/Fantasy, 01/11/2019, RECEIVED
-Movie 3, 02/04/2019, Drama/Fantasy, 01/12/2019, RECEIVED
-Movie 5, 02/04/2019, Drama/Fantasy, 01/13/2019, RECEIVED
 Miss Bala, 02/01/2019, Mystery/Thriller, 01/17/2019, RECEIVED
+Halloween, 10/25/1978, Horror/Slasher, 10/01/1978, RELEASED
+Halloween II, 10/30/1981, Horror/Shasher, 10/03/1981, RELEASED
+Halloween Kills, 10/15/2021, Horror/Slasher, 10/01/1981, RECEIVED
+A Nightmare on Elm Street, Supernatural/Slasher, 11/09,2984, RELEASED
+Movie F, 10/04/2021, Mystery, 09/28/2021, RELEASED
+The Great Wall, 02/17/2017, Sci-Fi/Action, 02/10/2017, RELEASED
+Movie K, 10/12/2021, Mystery, 10/10/2021, RECEIVED
+The Texas Chainsaw Massacre, 10/11/1974, Horror, 10/01/1974, RELEASED
+Movie A, 12/30/2005, Action, 11/05/2005, RELEASED
+Movie D, 03/23/2000, Supernatural, 03/18/2000, RELEASED
+

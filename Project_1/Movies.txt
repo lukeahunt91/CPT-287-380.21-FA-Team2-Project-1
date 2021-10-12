@@ -4,7 +4,7 @@ Halloween, 10/25/1978, Horror/Slasher, 10/01/1978, RELEASED
 Halloween II, 10/30/1981, Horror/Slasher, 10/03/1981, RELEASED
 Halloween Kills, 10/15/2021, Horror/Slasher, 10/01/1981, RECEIVED
 A Nightmare on Elm Street, 11/09/1984, Supernatural/Slasher, 11/01/1984, RELEASED
-Movie F, 10/04/2021, Mystery, 09/28/2021, RELEASED
+Movie F, 10/04/2021, Mystery, 10/28/2021, RELEASED
 The Great Wall, 02/17/2017, Sci-Fi/Action, 02/10/2017, RELEASED
 Movie K, 10/12/2021, Mystery, 10/10/2021, RECEIVED
 The Texas Chainsaw Massacre, 10/11/1974, Horror, 10/01/1974, RELEASED
